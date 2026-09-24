@@ -282,6 +282,10 @@
   .darkness { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; transition: opacity 1.6s ease;
     background: radial-gradient(ellipse 65% 40% at 50% 56%, rgba(40,10,30,.2), rgba(16,4,14,.93) 72%); }
   .cake-band.lights-off .darkness { opacity: 1; }
+  .cake-band { min-height: 0; transition: min-height .8s ease; }
+  .cake-band.is-fullscreen { min-height: 100vh; min-height: 100svh; justify-content: center; }
+  .cake-band.lights-off .btn.big-cta { animation-name: ring-soft; }
+  @keyframes ring-soft { 0% { box-shadow: 3px 4px 0 var(--ink), 0 0 0 0 rgba(255,190,215,.55) } 100% { box-shadow: 3px 4px 0 var(--ink), 0 0 0 22px rgba(255,190,215,0) } }
   .cake-band.lights-off .sunburst { opacity: 0; }
   .cake-band .sunburst { transition: opacity 1.2s; }
   .fireworks { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; }
@@ -378,6 +382,8 @@
   .postmark { position: absolute; top: 18px; right: 56px; width: 96px; height: 96px; z-index: 3; color: rgba(226,71,95,.6); rotate: -14deg; pointer-events: none; }
   .postmark svg { width: 100%; height: 100%; font-family: "Patrick Hand", cursive; }
 
+  .letter-highlight { display: inline-block; margin: 0 0 8px -4px; padding: 0 8px; font: 700 40px/36px "Caveat", cursive; color: var(--red); rotate: -2deg;
+    background: linear-gradient(transparent 52%, rgba(255,226,122,.9) 52%, rgba(255,226,122,.9) 88%, transparent 88%); animation: pop .7s cubic-bezier(.3,1.7,.5,1) both; }
   .kiss { position: absolute; left: 44px; bottom: 16px; font-size: 44px; rotate: -18deg; animation: pop .6s cubic-bezier(.3,1.7,.5,1); filter: saturate(1.2); }
 
   /* Motivos: céu com nuvens passando */

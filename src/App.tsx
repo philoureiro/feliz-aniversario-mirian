@@ -73,7 +73,7 @@ export default function App() {
 
       <div className="wrap">
         <Hero drawn={phase === "open" ? "draw-now" : "pre"} onOpen={openMedia} />
-        <Cake burst={burst} rain={rain} onSing={play} />
+        <Cake burst={burst} rain={rain} onSing={play} onStopMusic={stop} />
         <Counter />
         <Moments onOpen={openMedia} />
         <Gallery onOpen={openMedia} />

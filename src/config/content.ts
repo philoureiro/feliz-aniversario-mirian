@@ -35,8 +35,8 @@ export const content = {
   inicio: {
     linha1: "feliz aniversário,",
     selo: "{idade} aninhos ✨",
-    legendaFotoPrincipal: "a aniversariante mais linda",
-    recado: "Hoje o dia é todo seu. Aproveita cada pedacinho, sorri bastante e lembra que tem alguém aqui torcendo muito por você ♥",
+    legendaFotoPrincipal: "a aniversariante mais gata",
+    recado: "Hoje o dia é todo seu. Mas já vou avisando: tô só esperando a hora de te encher de beijo 😏♥",
   },
 
   bolo: {
@@ -61,7 +61,7 @@ export const content = {
     faltamVarias: "faltam {n}…",
     // 4. festa
     pronto: "pedido feito! ✨",
-    depois: "tomara que eu esteja nele 🙈",
+    depois: "se o pedido fui eu, pode considerar realizado 😏",
     botaoCantar: "♪ cantar parabéns",
     botaoDeNovo: "🕯️ acender de novo",
   },
@@ -70,7 +70,7 @@ export const content = {
     titulo: "a gente se conheceu faz",
     selo: "ao vivo",
     unidades: { dias: "dias", horas: "horas", minutos: "minutos", segundos: "segundos" },
-    rodape: "pouquinho tempo… e você já virou a melhor parte dos meus dias.",
+    rodape: "pouquinho tempo… e eu já não consigo tirar você da cabeça.",
   },
 
   // a foto/vídeo de cada momento fica em media.js, na mesma ordem
@@ -79,9 +79,9 @@ export const content = {
     selo: "capítulo 1",
     rodape: "e isso ainda é só o primeiro xote…",
     itens: [
-      { data: "4 de julho de 2026", titulo: "um festival de forró", texto: "No meio da poeira, da sanfona e de tanta gente, eu só conseguia reparar em você.", legenda: "o começo de tudo" },
-      { data: "a mesma noite", titulo: "posso te chamar pra dançar?", texto: "Juntei coragem e estendi a mão. Dois pra lá, dois pra cá, e eu já não queria que a música acabasse.", legenda: "dois pra lá, dois pra cá" },
-      { data: "ainda naquela noite", titulo: "o primeiro beijo", texto: "Na barraca, com o forró tocando lá fora. Foi ali que eu soube que não ia te esquecer tão cedo.", legenda: "nosso primeiro beijo ♥" },
+      { data: "4 de julho de 2026", titulo: "um festival de forró", texto: "No meio da poeira, da sanfona e de tanta gente, eu só conseguia olhar pra você. E não era só pelo sorriso 😏", legenda: "o começo de tudo" },
+      { data: "a mesma noite", titulo: "posso te chamar pra dançar?", texto: "Juntei coragem e estendi a mão. Com você coladinha em mim, o forró podia durar a noite inteira.", legenda: "dois pra lá, dois pra cá" },
+      { data: "ainda naquela noite", titulo: "o primeiro beijo", texto: "Na barraca, com o forró tocando lá fora. Um beijo e eu já tava viciado.", legenda: "nosso primeiro beijo ♥" },
     ],
   },
 
@@ -98,14 +98,20 @@ export const content = {
     titulo: "uma cartinha pra você",
     carimbo: "correio do amor",
     saudacao: "{apelido},",
-    texto: `Faz pouco tempo que um forró colocou você no meu caminho, e parece que eu te conheço há muito mais.
+    // linha em destaque logo abaixo da saudação (vazio = sem destaque)
+    destaque: "meu amor de forró ♥",
+    texto: `Presta atenção que eu vou falar uma vez só (mentira, vou falar a vida inteira): você é a coisa mais linda que já passou na frente desse homem aqui.
 
-Eu ainda lembro da coragem que precisei pra te chamar pra dançar. Ainda bem que eu chamei.
+Eu tava lá no festival, quietinho, na minha, quando você apareceu com esse cabelo ondulado e esse olhar de quem sabe exatamente o que tá fazendo. Pronto. Perdi o rumo, o ritmo e a vergonha na cara. Te chamei pra dançar porque bobo eu não sou.
 
-Hoje é o seu dia, e eu queria estar aí pra te dar um abraço apertado e te roubar pra mais uma dança.
+E aquela nossa manhã de domingo na barraca? Olha… ali eu entendi que tinha ganhado na loteria sem nem ter jogado. E que sorte…
 
-Que os seus {idade} sejam leves, cheios de risada, música boa e gente que te faz bem. E que eu esteja por perto pra ver tudo de pertinho.`,
-    assinatura: "um beijo, {de}",
+Hoje é o seu dia, e eu devia estar aí te pegando pela cintura e te enchendo de beijo na frente de todo mundo. Não deu. Mas relaxa: tô guardando beijo acumulado, com juros e correção monetária.
+
+{idade} aninhos, hein? Tá cada vez mais perigosa. Sorte a minha.
+
+Feliz aniversário, meu bombom. Aproveita o dia, que o resto eu resolvo pessoalmente 😏`,
+    assinatura: "do seu malandro apaixonado, {de}",
     dica: "(toca na carta pra ler tudo de uma vez)",
   },
 
@@ -116,16 +122,16 @@ Que os seus {idade} sejam leves, cheios de risada, música boa e gente que te fa
     frente: "nº {n}",
     abrir: "abre aqui ♥",
     itens: [
-      "esse seu olhar, que me desmonta",
-      "seu cabelo ondulado",
-      "seu sorriso simpático, que ilumina qualquer lugar",
-      "essa cinturinha de boneca",
-      "dormir de conchinha com você",
-      "o jeito que você dança forró",
+      "esse seu olhar, que me desmonta inteiro",
+      "esse cabelo ondulado que eu adoro bagunçar",
+      "seu sorriso, que me ganha toda vez",
+      "essa cinturinha de boneca na minha mão",
+      "dormir de conchinha com você (e acordar também)",
+      "o jeito que você dança forró coladinha em mim",
+      "sua boca. só isso 😏",
+      "seu cheiro, que fica em mim depois",
       "sua risada, que é contagiante",
-      "como a conversa com você flui fácil",
-      "seu cheiro, que fica na minha memória",
-      "o jeito que você me olha quando acha que eu não tô vendo",
+      "o jeito que você me olha quando quer beijo",
     ],
   },
 
@@ -133,7 +139,7 @@ Que os seus {idade} sejam leves, cheios de risada, música boa e gente que te fa
     titulo: "uma última pergunta…",
     faixa: "⚠️ PERGUNTA IMPORTANTE",
     selo: "urgente!",
-    texto: "posso comemorar o seu próximo aniversário com você também?",
+    texto: "posso passar o seu próximo aniversário te enchendo de beijo?",
     sim: "sim!",
     // o botão "não" foge quando o dedo chega perto; a cada fuga troca de texto
     // o primeiro par aparece sempre primeiro; os outros vêm embaralhados, sem fim
@@ -189,8 +195,8 @@ Que os seus {idade} sejam leves, cheios de risada, música boa e gente que te fa
       { botao: "última chance", frase: "(não era a última)" },
       { botao: "clica no sim", frase: "até o não tá mandando clicar no sim" },
     ],
-    resposta: "combinado! ♥",
-    respostaSub: "e dessa vez eu tô aí pessoalmente.",
+    resposta: "combinado! 😏♥",
+    respostaSub: "e dessa vez eu tô aí pessoalmente. vai separando os beijos.",
     liberado: "presente liberado! desce aí 👇",
   },
 
@@ -202,20 +208,20 @@ Que os seus {idade} sejam leves, cheios de risada, música boa e gente que te fa
     // uma linha aparece por vez; linhas com "presente" ganham destaque dourado
     linhas: [
       "eu queria muito estar aí com você hoje…",
-      "te dar um abraço apertado e te chamar pra dançar de novo.",
+      "te agarrar pela cintura e roubar uns beijos no meio do parabéns.",
       "mas não deu.",
       "então eu fiz isso aqui, pra ficar um pouquinho mais pertinho de você.",
       "aproveita o presente que eu te mandei 🎁",
-      "só uma dica: é de comer. e não precisa dividir 😋",
-      "e guarda um abraço pra mim. vou buscar ele logo.",
+      "só uma dica: é de comer. a sobremesa de verdade fica pra quando eu chegar 😏",
+      "e vai guardando os beijos. vou buscar todos, com juros.",
     ],
-    assinatura: "te adoro, {de} ♥",
+    assinatura: "doido por você, {de} ♥",
   },
 
   rodape: {
-    linha: "com todo carinho do mundo,",
+    linha: "de quem não para de pensar em você,",
     assinatura: "{de}",
-    pequeno: "feliz aniversário, {apelido} ♥",
+    pequeno: "feliz aniversário, meu amor ♥",
   },
 
   musica: { tocar: "parabéns", parar: "parar" },

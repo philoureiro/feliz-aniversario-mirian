@@ -40,6 +40,7 @@ export function Letter() {
             </svg>
           </span>
           <p className="hi">{t(c.saudacao)}</p>
+          {c.destaque && <p className="letter-highlight">{t(c.destaque)}</p>}
           <div className="body">{text.slice(0, n)}{!done && <span className="caret" />}</div>
           <p className="sign" style={{ opacity: done ? 1 : 0 }}>{t(c.assinatura)}</p>
           {done && <span className="kiss" aria-hidden="true">💋</span>}

@@ -4,6 +4,7 @@ import { content } from "../config/content";
 import { t, HEX, vibrate } from "../lib/text";
 import { Band } from "./Band";
 import { Fireworks } from "./Fireworks";
+import { startSuspense, type Suspense } from "../lib/suspense";
 
 interface Dot { l: number; t: number; r: number; c: string }
 type CandleState = "off" | "lit" | "out";
@@ -22,7 +23,7 @@ function Dots({ items }: { items: Dot[] }) {
 }
 
 // O bolo vira um ritual: acender, apagar as luzes, pedido, soprar (no microfone!) e fogos
-export function Cake({ burst, rain, onSing }: EffectsProps & { onSing: () => void }) {
+export function Cake({ burst, rain, onSing, onStopMusic }: EffectsProps & { onSing: () => void; onStopMusic: () => void }) {
   const c = content.bolo;
   const total = c.velas;
   const [candles, setCandles] = useState<CandleState[]>(() => Array(total).fill("off"));
@@ -38,13 +39,23 @@ export function Cake({ burst, rain, onSing }: EffectsProps & { onSing: () => voi
   const candlesRef = useRef(candles);
   candlesRef.current = candles;
   const micStop = useRef<(() => void) | null>(null);
+  const suspense = useRef<Suspense | null>(null);
   const timers = useRef<number[]>([]);
 
   const later = (fn: () => void, ms: number) => { timers.current.push(window.setTimeout(fn, ms)); };
-  useEffect(() => () => { timers.current.forEach(clearTimeout); micStop.current?.(); }, []);
+  useEffect(() => () => { timers.current.forEach(clearTimeout); micStop.current?.(); suspense.current?.stop(); }, []);
 
   const litCount = candles.filter((s) => s === "lit").length;
   const lightsOff = stage === "lit" || stage === "wish" || stage === "blow" || stage === "dark";
+  // durante o ritual a seção ocupa a tela inteira, como a sala com as luzes apagadas
+  const fullscreen = stage !== "unlit" && stage !== "party";
+
+  useEffect(() => {
+    if (!fullscreen) return;
+    const id = requestAnimationFrame(() =>
+      document.querySelector(".cake-band")?.scrollIntoView({ behavior: "smooth", block: "start" }));
+    return () => cancelAnimationFrame(id);
+  }, [fullscreen]);
 
   const sparkAt = (i: number, n: number) => {
     const el = candleRefs.current[i];
@@ -56,8 +67,17 @@ export function Cake({ burst, rain, onSing }: EffectsProps & { onSing: () => voi
   const setCandle = (i: number, s: CandleState) =>
     setCandles((prev) => prev.map((v, j) => (j === i ? s : v)));
 
+  // trilha de suspense: começa ao acender (precisa nascer dentro de um toque)
+  const beginSuspense = () => {
+    if (suspense.current) return;
+    onStopMusic();
+    suspense.current = startSuspense();
+  };
+  const endSuspense = () => { suspense.current?.stop(); suspense.current = null; };
+
   // 1. acender uma a uma
   const lightAll = () => {
+    beginSuspense();
     setStage("lighting");
     candlesRef.current.forEach((_, i) => later(() => { setCandle(i, "lit"); sparkAt(i, 10); vibrate(15); }, 350 + i * 420));
     later(() => setStage("lit"), 350 + total * 420 + 500);
@@ -67,6 +87,7 @@ export function Cake({ burst, rain, onSing }: EffectsProps & { onSing: () => voi
   const makeWish = () => {
     setStage("wish");
     setCount(0);
+    suspense.current?.intensify();
     c.contagem.forEach((_, i) => later(() => setCount(i), i === 0 ? 0 : 1300 + (i - 1) * 850));
     later(() => setStage("blow"), 1300 + (c.contagem.length - 1) * 850);
   };
@@ -84,6 +105,7 @@ export function Cake({ burst, rain, onSing }: EffectsProps & { onSing: () => voi
   // 4. escuro, fumaça, fogos, luzes de volta
   const finish = () => {
     micStop.current?.();
+    endSuspense();
     setStage("dark");
     later(() => { setFireworks((n) => n + 1); onSing(); }, 900);
     later(() => {
@@ -97,6 +119,7 @@ export function Cake({ burst, rain, onSing }: EffectsProps & { onSing: () => voi
   const onCandle = (i: number, e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (stage === "unlit" && candles[i] === "off") {
+      beginSuspense();
       setCandle(i, "lit");
       sparkAt(i, 10);
       if (candles.filter((s) => s === "off").length === 1) later(() => setStage("lit"), 500);
@@ -116,6 +139,7 @@ export function Cake({ burst, rain, onSing }: EffectsProps & { onSing: () => voi
       an.fftSize = 1024;
       ac.createMediaStreamSource(stream).connect(an);
       const data = new Uint8Array(an.fftSize);
+      suspense.current?.duck(); // o microfone não pode confundir a música com sopro
       let raf = 0;
       let held = 0;
       let last = performance.now();
@@ -154,6 +178,7 @@ export function Cake({ burst, rain, onSing }: EffectsProps & { onSing: () => voi
   };
 
   const reset = () => {
+    endSuspense();
     timers.current.forEach(clearTimeout);
     timers.current = [];
     setCandles(Array(total).fill("off"));
@@ -171,7 +196,7 @@ export function Cake({ burst, rain, onSing }: EffectsProps & { onSing: () => voi
 
   return (
     <Band tone="rose" title={c.titulo} stamp={c.selo} stampStyle="burst"
-      className={`cake-band stage-${stage}${lightsOff ? " lights-off" : ""}`}
+      className={`cake-band stage-${stage}${lightsOff ? " lights-off" : ""}${fullscreen ? " is-fullscreen" : ""}`}
       decor={<><div className="darkness" aria-hidden="true" /><Fireworks run={fireworks} /></>}>
       <div className="cake-stage">
         {stage === "wish"
