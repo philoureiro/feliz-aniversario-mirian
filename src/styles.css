@@ -89,6 +89,8 @@
   .hero h1 .l1 { display: block; font-size: clamp(40px, 11vw, 58px); color: var(--ink-soft); }
   .hero h1 .l2 { display: block; font-size: clamp(72px, 22vw, 120px); color: var(--red); overflow-wrap: anywhere; }
   .hero h1 .l2 span { display: inline-block; animation: float 3.2s ease-in-out infinite; }
+  /* folga em volta de cada letra: no Safari a animação recorta o que passa da caixa (pingos do i, ponta do r) */
+  .hero h1 .l2 span { line-height: 1.2; padding: .14em .03em .06em; margin: -.14em -.03em -.06em; }
   @keyframes float { 0%,100% { transform: translateY(0) rotate(0) } 50% { transform: translateY(-8px) rotate(-2deg) } }
   .age { font-family: "Caveat", cursive; font-weight: 700; font-size: 30px; background: var(--hl); padding: 2px 16px; transform: rotate(-3deg); display: inline-block; box-shadow: 2px 3px 0 var(--ink); border: 2px solid var(--ink); border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; }
 
@@ -490,3 +492,4 @@
 
   /* player do YouTube da música de fundo: fica fora da tela (não pode ser display:none) */
   .yt-bg { position: fixed; left: -300px; bottom: 0; width: 200px; height: 200px; opacity: 0; pointer-events: none; overflow: hidden; }
+  .band h2, .finale h2 { padding-block: .14em .06em; line-height: 1.05; }
