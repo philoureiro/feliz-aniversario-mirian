@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { content } from "../config/content";
-import { t, Rich } from "../lib/text";
+import { t } from "../lib/text";
+import { Band } from "./Band";
 
-// Carta que se escreve letra por letra quando aparece na tela
+// Carta de correio aéreo que se escreve letra por letra quando aparece na tela
 export function Letter() {
   const c = content.carta;
   const text = t(c.texto);
@@ -25,14 +26,26 @@ export function Letter() {
 
   const done = n >= text.length;
   return (
-    <section>
-      <h2><Rich text={c.titulo} /></h2>
-      <div className="letter reveal" ref={ref} onClick={() => setN(text.length)}>
-        <p className="hi">{t(c.saudacao)}</p>
-        <div className="body">{text.slice(0, n)}{!done && <span className="caret" />}</div>
-        <p className="sign" style={{ opacity: done ? 1 : 0 }}>{t(c.assinatura)}</p>
+    <Band tone="pink" title={c.titulo}>
+      <div className="airmail reveal" ref={ref} onClick={() => setN(text.length)}>
+        <div className="letter">
+          <span className="postage" aria-hidden="true"><span>♥</span></span>
+          <span className="postmark" aria-hidden="true">
+            <svg viewBox="0 0 100 100">
+              <defs><path id="pm-circle" d="M50 50 m-36 0 a36 36 0 1 1 72 0 a36 36 0 1 1 -72 0" /></defs>
+              <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" strokeWidth="2.5" />
+              <circle cx="50" cy="50" r="26" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              <text fontSize="11.5" fill="currentColor" letterSpacing="1.5"><textPath href="#pm-circle">{t(c.carimbo).toUpperCase()} ♥ {t(c.carimbo).toUpperCase()} ♥</textPath></text>
+              <text x="50" y="55" textAnchor="middle" fontSize="13" fill="currentColor">♥ {new Date().getDate()}/{new Date().getMonth() + 1}</text>
+            </svg>
+          </span>
+          <p className="hi">{t(c.saudacao)}</p>
+          <div className="body">{text.slice(0, n)}{!done && <span className="caret" />}</div>
+          <p className="sign" style={{ opacity: done ? 1 : 0 }}>{t(c.assinatura)}</p>
+          {done && <span className="kiss" aria-hidden="true">💋</span>}
+        </div>
       </div>
       <span className="tip">{t(c.dica)}</span>
-    </section>
+    </Band>
   );
 }

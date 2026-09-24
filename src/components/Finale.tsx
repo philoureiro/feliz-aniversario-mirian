@@ -32,7 +32,7 @@ export function Finale({ burst, rain, unlocked }: EffectsProps & { unlocked: boo
   };
 
   return (
-    <section>
+    <section className="flush">
       <div className="finale">
         <Twinkles count={45} />
         <h2><Rich text={c.titulo} /></h2>

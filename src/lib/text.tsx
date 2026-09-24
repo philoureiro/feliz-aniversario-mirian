@@ -22,8 +22,9 @@ export const isVideo = (s?: string | null): boolean => /\.(mp4|mov|webm|m4v)$/i.
 export const asset = (s: string): string =>
   /^(https?:|data:|blob:)/.test(s) ? s : import.meta.env.BASE_URL + s.replace(/^\//, "");
 
-export const CUTE = ["var(--pink)", "var(--mint)", "var(--lilac)", "var(--hl)", "var(--peach)"];
-export const HEX = ["#F7A8BA", "#BFE8D6", "#CDB9F5", "#FFE27A", "#FFC9A8"];
+// paleta romântica: rosa, rosé, pêssego-rosado, lavanda, champanhe
+export const CUTE = ["#F7A8BA", "#FFC4CF", "#FFCDB8", "#E5C6F2", "#F8E0B5"];
+export const HEX = ["#F7A8BA", "#E88AA5", "#FFCDB8", "#E5C6F2", "#F8E0B5"];
 
 export const vibrate = (pattern: number | number[]): void => {
   navigator.vibrate?.(pattern);

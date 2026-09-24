@@ -2,6 +2,7 @@ import { useState, useRef, type MouseEvent, type PointerEvent, type TouchEvent }
 import { content } from "../config/content";
 import { t, Rich, vibrate } from "../lib/text";
 import type { EffectsProps } from "../lib/types";
+import { Caution } from "./Band";
 
 const DODGE_RADIUS = 90; // px: dedo mais perto que isso faz o "não" fugir
 const DODGE_COOLDOWN = 450; // ms entre uma fuga e outra
@@ -14,16 +15,6 @@ function shuffle<T>(arr: T[]): T[] {
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
-}
-
-// Fita de "cuidado" com texto correndo
-function Caution({ text, className }: { text: string; className: string }) {
-  const items = Array.from({ length: 8 }, (_, i) => <span key={i}>{text}</span>);
-  return (
-    <div className={"caution " + className} aria-hidden="true">
-      <div className="track">{items}{items}</div>
-    </div>
-  );
 }
 
 // Pergunta final: o "não" foge do dedo e troca de texto a cada fuga; o "sim" cresce
@@ -99,7 +90,7 @@ export function Ask({ burst, rain, onYes }: EffectsProps & { onYes: () => void }
   const noScale = Math.max(0.7, 1 - tries * 0.03);
 
   return (
-    <section className="ask-section">
+    <section className="band band--red ask-section">
       <Caution text={t(c.faixa)} className="top" />
       <h2><Rich text={c.titulo} /></h2>
       <div className="ask reveal" ref={box} onPointerDown={yes ? undefined : onBoxPointer} onPointerMove={yes ? undefined : onBoxPointer} onTouchMove={yes ? undefined : onBoxTouchMove}>

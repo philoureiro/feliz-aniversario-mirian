@@ -39,18 +39,34 @@ export const content = {
 
   bolo: {
     titulo: "hora do *bolo!*",
+    selo: "é hoje!",
     velas: 3,
-    pedido: "fecha os olhos e faz um pedido…",
-    dica: "👇 toca em cada velinha pra apagar",
-    faltaUma: "isso! falta 1…",
-    faltamVarias: "isso! faltam {n}…",
+    // 1. acender
+    convite: "vamos acender as velinhas?",
+    botaoAcender: "🔥 acender as velinhas",
+    acendendo: "acendendo…",
+    // 2. pedido (as luzes apagam)
+    pedido: "shhh… as luzes apagaram. faz um pedido…",
+    botaoPedido: "✨ fiz meu pedido",
+    contagem: ["fecha os olhos…", "3", "2", "1"],
+    // 3. soprar
+    sopra: "agora sopra! 🌬️",
+    botaoMicrofone: "🎤 soprar de verdade",
+    ouvindo: "sopra forte no celular! 🌬️",
+    semMicrofone: "sem microfone? toca nas velinhas 😉",
+    ouToque: "ou toca em cada velinha",
+    faltaUma: "falta 1…",
+    faltamVarias: "faltam {n}…",
+    // 4. festa
     pronto: "pedido feito! ✨",
     depois: "tomara que eu esteja nele 🙈",
     botaoCantar: "♪ cantar parabéns",
+    botaoDeNovo: "🕯️ acender de novo",
   },
 
   contador: {
     titulo: "a gente se conheceu faz",
+    selo: "ao vivo",
     unidades: { dias: "dias", horas: "horas", minutos: "minutos", segundos: "segundos" },
     rodape: "pouquinho tempo… e você já virou a melhor parte dos meus dias.",
   },
@@ -58,6 +74,7 @@ export const content = {
   // a foto/vídeo de cada momento fica em media.js, na mesma ordem
   momentos: {
     titulo: "*nossos primeiros capítulos*",
+    selo: "capítulo 1",
     rodape: "e isso é só o começo…",
     itens: [
       { data: "o primeiro oi", titulo: "quando a gente se conheceu", texto: "Conta aqui como foi. O lugar, a primeira conversa, o que você pensou na hora.", legenda: "o começo ♥" },
@@ -69,12 +86,14 @@ export const content = {
 
   videos: {
     titulo: "*nossos vídeos*",
+    selo: "● rec",
     dica: "toca pra ver com som 🔊",
     arraste: "← arrasta pro lado →",
   },
 
   carta: {
     titulo: "uma cartinha pra você",
+    carimbo: "correio do amor",
     saudacao: "{para},",
     texto: `Faz pouquinho tempo que você chegou, mas já mudou muita coisa por aqui.
 
@@ -89,6 +108,7 @@ Que esse novo ano seja lindo como você. E que eu esteja por perto pra ver tudo 
 
   motivos: {
     titulo: "coisas que eu já *adoro em você*",
+    selo: "abre!",
     dica: "abre um bilhetinho de cada vez ♥",
     frente: "nº {n}",
     abrir: "abre aqui ♥",

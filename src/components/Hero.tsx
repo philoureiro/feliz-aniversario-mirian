@@ -30,9 +30,9 @@ export function Hero({ drawn, onOpen }: { drawn: string; onOpen: OpenMedia }) {
       <section className="hero">
         <div className="balloons" aria-hidden="true">
           <span className="bal" style={{ background: "var(--pink)", left: -6, top: 60 }} />
-          <span className="bal" style={{ background: "var(--mint)", left: 30, top: 120, width: 40, height: 50, animationDelay: "-1.5s" }} />
+          <span className="bal" style={{ background: "#FFCDB8", left: 30, top: 120, width: 40, height: 50, animationDelay: "-1.5s" }} />
           <span className="bal" style={{ background: "var(--lilac)", right: -4, top: 70, animationDelay: "-.7s" }} />
-          <span className="bal" style={{ background: "var(--hl)", right: 34, top: 132, width: 40, height: 50, animationDelay: "-2.2s" }} />
+          <span className="bal" style={{ background: "#F8E0B5", right: 34, top: 132, width: 40, height: 50, animationDelay: "-2.2s" }} />
         </div>
         <h1>
           <span className="l1">{t(c.linha1)}</span>
