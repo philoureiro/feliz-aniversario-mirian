@@ -472,10 +472,10 @@
   .swipe { font-size: 16px; color: var(--ink-soft); margin-top: -10px; }
 
   .lightbox { position: fixed; inset: 0; z-index: 60; background: rgba(30,22,51,.92); display: grid; place-items: center; padding: 24px 16px; box-sizing: border-box; cursor: zoom-out; }
-  .lightbox .pol { background: #fff; padding: 12px 12px 58px; position: relative; max-width: 100%; animation: pop .45s cubic-bezier(.3,1.5,.5,1); cursor: default; }
+  .lightbox .pol { background: #fff; padding: 12px 12px 14px; position: relative; max-width: 100%; animation: pop .45s cubic-bezier(.3,1.5,.5,1); cursor: default; }
   .lightbox img, .lightbox video { display: block; max-width: min(88vw, 640px); max-height: 70vh; background: #000; }
   .lightbox .close { position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); right: 14px; font: 700 24px "Caveat", cursive; background: var(--paper); color: var(--ink); border: 2.5px solid var(--ink); border-radius: 999px; padding: 6px 16px; cursor: pointer; }
-  .lightbox .cap { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; font-family: "Caveat", cursive; font-size: 32px; color: var(--ink); }
+  .lightbox .cap { display: block; margin-top: 10px; max-width: min(88vw, 640px); text-align: center; font-family: "Caveat", cursive; font-size: 30px; line-height: 1.05; color: var(--ink); text-wrap: balance; }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -487,3 +487,6 @@
   .polaroid { padding-bottom: 12px; }
   .hang .polaroid, .reel { padding-bottom: 10px; }
   .polaroid .cap { position: static; display: block; margin-top: 10px; padding-inline: 4px; line-height: 1.05; text-wrap: balance; }
+
+  /* player do YouTube da música de fundo: fica fora da tela (não pode ser display:none) */
+  .yt-bg { position: fixed; left: -300px; bottom: 0; width: 200px; height: 200px; opacity: 0; pointer-events: none; overflow: hidden; }

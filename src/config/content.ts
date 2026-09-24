@@ -224,7 +224,7 @@ Feliz aniversário, meu bombom. Aproveita o dia, que o resto eu resolvo pessoalm
     pequeno: "feliz aniversário, meu amor ♥",
   },
 
-  musica: { tocar: "parabéns", parar: "parar" },
+  musica: { tocar: "parabéns", parar: "parar", fundoTocar: "música", fundoPausar: "pausar" },
 
   fotoVazia: "foto aqui",
   videoVazio: "vídeo aqui",

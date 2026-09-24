@@ -5,6 +5,8 @@ import { t, asset, isVideo } from "./lib/text";
 import { playParabens, playFile } from "./lib/parabens";
 import { useMagic } from "./hooks/useMagic";
 import { useReveal } from "./hooks/useReveal";
+import { useYouTubeMusic } from "./hooks/useYouTubeMusic";
+import { useFileMusic } from "./hooks/useFileMusic";
 import { Intro } from "./components/Intro";
 import { Hero } from "./components/Hero";
 import { Cake } from "./components/Cake";
@@ -24,6 +26,13 @@ export default function App() {
   const [playing, setPlaying] = useState(false);
   const [answered, setAnswered] = useState(false);
   const stopRef = useRef<(() => void) | null>(null);
+  const fileBg = useFileMusic(media.fundo.arquivo ? asset(media.fundo.arquivo) : null, media.fundo.inicio, media.fundo.volume);
+  const ytBg = useYouTubeMusic(media.fundo.arquivo ? "" : media.youtube.url, media.youtube.inicio, media.youtube.volume);
+  const bg = fileBg.enabled ? fileBg : ytBg;
+  // a música de fundo pausa pra vídeos e pro ritual do bolo, e volta depois
+  const resumeBg = useRef(false);
+  const pauseBg = () => { if (bg.playing) resumeBg.current = true; bg.pause(); };
+  const resumeBgIfNeeded = () => { if (resumeBg.current) { resumeBg.current = false; bg.play(); } };
   useReveal();
 
   useEffect(() => {
@@ -44,7 +53,7 @@ export default function App() {
   const play = () => {
     stop();
     setPlaying(true);
-    const done = () => { setPlaying(false); stopRef.current = null; };
+    const done = () => { setPlaying(false); stopRef.current = null; resumeBgIfNeeded(); };
     stopRef.current = media.musica ? playFile(asset(media.musica), done) : playParabens(done);
   };
 
@@ -52,7 +61,7 @@ export default function App() {
     if (phase !== "closed") return;
     setPhase("opening");
     window.scrollTo({ top: 0, behavior: "instant" });
-    play();
+    if (bg.enabled) bg.play(); else play();
     setTimeout(() => {
       setPhase("open");
       burst(innerWidth / 2, innerHeight * 0.45, 120);
@@ -62,7 +71,7 @@ export default function App() {
 
   // vídeo abre com som: para a música pra não tocar os dois juntos
   const openMedia: OpenMedia = (item) => {
-    if (isVideo(item.src)) stop();
+    if (isVideo(item.src)) { stop(); pauseBg(); }
     setLightbox(item);
   };
 
@@ -73,7 +82,7 @@ export default function App() {
 
       <div className="wrap">
         <Hero drawn={phase === "open" ? "draw-now" : "pre"} onOpen={openMedia} />
-        <Cake burst={burst} rain={rain} onSing={play} onStopMusic={stop} />
+        <Cake burst={burst} rain={rain} onSing={play} onStopMusic={() => { stop(); pauseBg(); }} />
         <Counter />
         <Moments onOpen={openMedia} />
         <Gallery onOpen={openMedia} />
@@ -90,11 +99,19 @@ export default function App() {
         <small>{t(content.rodape.pequeno)}</small>
       </footer>
 
-      <button className={"music" + (playing ? " on" : "")} onClick={playing ? stop : play} aria-label={playing ? content.musica.parar : content.musica.tocar}>
-        <span className="note">♪</span>{playing ? content.musica.parar : content.musica.tocar}
-      </button>
+      {bg.enabled ? (
+        <button className={"music" + (playing || bg.playing ? " on" : "")}
+          onClick={() => { if (playing) stop(); else if (bg.playing) { resumeBg.current = false; bg.pause(); } else bg.play(); }}
+          aria-label={playing || bg.playing ? content.musica.fundoPausar : content.musica.fundoTocar}>
+          <span className="note">♪</span>{playing || bg.playing ? content.musica.fundoPausar : content.musica.fundoTocar}
+        </button>
+      ) : (
+        <button className={"music" + (playing ? " on" : "")} onClick={playing ? stop : play} aria-label={playing ? content.musica.parar : content.musica.tocar}>
+          <span className="note">♪</span>{playing ? content.musica.parar : content.musica.tocar}
+        </button>
+      )}
 
-      <Lightbox item={lightbox} onClose={() => setLightbox(null)} />
+      <Lightbox item={lightbox} onClose={() => { setLightbox(null); resumeBgIfNeeded(); }} />
     </>
   );
 }
