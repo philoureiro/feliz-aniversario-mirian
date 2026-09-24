@@ -24,12 +24,13 @@ export const media: MediaConfig = {
   momentos: [
     "fotos/1.jpg",
     "fotos/2.jpg",
+    "fotos/3.jpg",
   ],
 
   galeria: [
     { src: "fotos/g1.jpg", legenda: "que sorriso" },
     { src: "fotos/g2.jpg", legenda: "a gente" },
-    { src: "fotos/g3.jpg", legenda: "meu dia favorito" },
+    { src: "fotos/g3.jpg", legenda: "meu xodó" },
     { src: "fotos/g4.jpg", legenda: "linda demais" },
   ],
 
@@ -37,7 +38,7 @@ export const media: MediaConfig = {
   videos: [
     { src: "videos/1.mp4", legenda: "a gente rindo à toa" },
     { src: "videos/2.mp4", legenda: "você sendo você" },
-    { src: "videos/3.mp4", legenda: "aquele dia" },
+    { src: "videos/3.mp4", legenda: "aquele forró" },
   ],
 
   // opcional: "musica/musica.mp3" toca no lugar do parabéns em caixinha de música

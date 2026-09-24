@@ -53,7 +53,7 @@
   .env { all: unset; cursor: pointer; position: relative; width: 250px; height: 162px; max-width: 78vw; }
   .env:focus-visible { outline: 2px dashed var(--hl); outline-offset: 14px; border-radius: 10px; }
   .env .back { position: absolute; inset: 0; z-index: 0; background: #E88FA5; border-radius: 8px; box-shadow: 0 18px 40px rgba(0,0,0,.35); }
-  .env .letter-in { position: absolute; left: 14px; right: 14px; top: 10px; height: 136px; z-index: 1; background: var(--paper); border-radius: 4px; display: flex; justify-content: center; padding-top: 22px; box-sizing: border-box;
+  .env .letter-in { position: absolute; left: 14px; right: 14px; top: 10px; height: 136px; z-index: 1; background: var(--paper); border-radius: 4px; display: flex; justify-content: center; padding: 18px 12px 0; box-sizing: border-box; text-align: center; line-height: 1.02;
     font-family: "Caveat", cursive; font-size: 28px; color: var(--red); transition: transform 1s cubic-bezier(.3,1.3,.5,1) .55s; }
   /* frente fechada: cobre tudo menos o V de cima, que fica por conta da aba */
   .env .front { position: absolute; inset: 0; z-index: 2; border-radius: 8px;

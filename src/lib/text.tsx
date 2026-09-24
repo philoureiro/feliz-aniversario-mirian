@@ -3,10 +3,11 @@ import { content } from "../config/content";
 type Vars = Record<string, string | number>;
 
 const primeiroNome = content.pessoas.para.split(" ")[0];
+const apelido = content.pessoas.apelido || primeiroNome;
 
-// troca {para}, {de}, {idade} e variáveis extras como {n}
+// troca {para}, {apelido}, {de}, {idade} e variáveis extras como {n}
 export function t(str: string | null | undefined, vars: Vars = {}): string {
-  const all: Vars = { para: primeiroNome, de: content.pessoas.de, idade: content.pessoas.idade, ...vars };
+  const all: Vars = { para: primeiroNome, apelido, de: content.pessoas.de, idade: content.pessoas.idade, ...vars };
   return String(str ?? "").replace(/\{(\w+)\}/g, (m, k: string) => (k in all ? String(all[k]) : m));
 }
 

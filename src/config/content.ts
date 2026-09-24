@@ -2,8 +2,9 @@
    TODA A COPY DO SITE FICA AQUI.
 
    Variáveis que podem ser usadas em qualquer texto:
-     {para}   nome de quem faz aniversário (só o primeiro nome)
-     {de}     seu nome
+     {para}     nome de quem faz aniversário (só o primeiro nome)
+     {apelido}  apelido carinhoso (se vazio, usa o nome)
+     {de}       seu nome
      {idade}  idade que a pessoa está fazendo
 
    Destaque com marca-texto amarelo: coloque o trecho entre *asteriscos*.
@@ -11,18 +12,19 @@
 
 export const content = {
   pessoas: {
-    para: "Nome",
-    de: "Seu Nome",
-    idade: 22,
+    para: "Mirian",
+    apelido: "Mih",
+    de: "Philipe",
+    idade: 28,
     // quando vocês se conheceram (AAAA-MM-DDTHH:MM), usado no contador
-    desde: "2026-06-10T20:00",
+    desde: "2026-07-04T00:00",
   },
 
-  tituloDaAba: "Feliz aniversário, {para} ♥",
+  tituloDaAba: "Feliz aniversário, {apelido} ♥",
 
   abertura: {
-    linhas: ["ei, {para}…", "tenho uma surpresa", "pra você"],
-    envelope: "feliz aniversário ♥",
+    linhas: ["ei, {apelido}…", "tenho uma surpresa", "pra você"],
+    envelope: "feliz aniversário, meu amor ♥",
     toque: "toca no envelope",
     dicaSom: "(aumenta o som 🔊)",
   },
@@ -75,10 +77,11 @@ export const content = {
   momentos: {
     titulo: "*nossos primeiros capítulos*",
     selo: "capítulo 1",
-    rodape: "e isso é só o começo…",
+    rodape: "e isso ainda é só o primeiro xote…",
     itens: [
-      { data: "o primeiro oi", titulo: "quando a gente se conheceu", texto: "Conta aqui como foi. O lugar, a primeira conversa, o que você pensou na hora.", legenda: "o começo ♥" },
-      { data: "o primeiro encontro", titulo: "nosso primeiro rolê", texto: "Aquele detalhe bobo que você não esquece. O nervosismo, a risada, o tchau que demorou.", legenda: "nós dois" },
+      { data: "4 de julho de 2026", titulo: "um festival de forró", texto: "No meio da poeira, da sanfona e de tanta gente, eu só conseguia reparar em você.", legenda: "o começo de tudo" },
+      { data: "a mesma noite", titulo: "posso te chamar pra dançar?", texto: "Juntei coragem e estendi a mão. Dois pra lá, dois pra cá, e eu já não queria que a música acabasse.", legenda: "dois pra lá, dois pra cá" },
+      { data: "ainda naquela noite", titulo: "o primeiro beijo", texto: "Na barraca, com o forró tocando lá fora. Foi ali que eu soube que não ia te esquecer tão cedo.", legenda: "nosso primeiro beijo ♥" },
     ],
   },
 
@@ -94,14 +97,14 @@ export const content = {
   carta: {
     titulo: "uma cartinha pra você",
     carimbo: "correio do amor",
-    saudacao: "{para},",
-    texto: `Faz pouquinho tempo que você chegou, mas já mudou muita coisa por aqui.
+    saudacao: "{apelido},",
+    texto: `Faz pouco tempo que um forró colocou você no meu caminho, e parece que eu te conheço há muito mais.
 
-Eu fico procurando motivo pra te mandar mensagem, pra te ver, pra ouvir sua risada de novo.
+Eu ainda lembro da coragem que precisei pra te chamar pra dançar. Ainda bem que eu chamei.
 
-Hoje é o seu dia, e eu queria que você soubesse o quanto eu tô feliz de estar do seu lado nele.
+Hoje é o seu dia, e eu queria estar aí pra te dar um abraço apertado e te roubar pra mais uma dança.
 
-Que esse novo ano seja lindo como você. E que eu esteja por perto pra ver tudo de pertinho.`,
+Que os seus {idade} sejam leves, cheios de risada, música boa e gente que te faz bem. E que eu esteja por perto pra ver tudo de pertinho.`,
     assinatura: "um beijo, {de}",
     dica: "(toca na carta pra ler tudo de uma vez)",
   },
@@ -113,12 +116,16 @@ Que esse novo ano seja lindo como você. E que eu esteja por perto pra ver tudo 
     frente: "nº {n}",
     abrir: "abre aqui ♥",
     itens: [
+      "esse seu olhar, que me desmonta",
+      "seu cabelo ondulado",
+      "seu sorriso simpático, que ilumina qualquer lugar",
+      "essa cinturinha de boneca",
+      "dormir de conchinha com você",
+      "o jeito que você dança forró",
       "sua risada, que é contagiante",
-      "o jeito que você fala das coisas que ama",
-      "como o tempo passa rápido do seu lado",
-      "seu jeitinho carinhoso",
-      "seu olhar",
-      "você ser exatamente quem você é",
+      "como a conversa com você flui fácil",
+      "seu cheiro, que fica na minha memória",
+      "o jeito que você me olha quando acha que eu não tô vendo",
     ],
   },
 
@@ -183,7 +190,7 @@ Que esse novo ano seja lindo como você. E que eu esteja por perto pra ver tudo 
       { botao: "clica no sim", frase: "até o não tá mandando clicar no sim" },
     ],
     resposta: "combinado! ♥",
-    respostaSub: "já tô contando os dias.",
+    respostaSub: "e dessa vez eu tô aí pessoalmente.",
     liberado: "presente liberado! desce aí 👇",
   },
 
@@ -195,10 +202,11 @@ Que esse novo ano seja lindo como você. E que eu esteja por perto pra ver tudo 
     // uma linha aparece por vez; linhas com "presente" ganham destaque dourado
     linhas: [
       "eu queria muito estar aí com você hoje…",
-      "te dar um abraço apertado e cantar parabéns bem desafinado no seu ouvido.",
+      "te dar um abraço apertado e te chamar pra dançar de novo.",
       "mas não deu.",
       "então eu fiz isso aqui, pra ficar um pouquinho mais pertinho de você.",
       "aproveita o presente que eu te mandei 🎁",
+      "só uma dica: é de comer. e não precisa dividir 😋",
       "e guarda um abraço pra mim. vou buscar ele logo.",
     ],
     assinatura: "te adoro, {de} ♥",
@@ -207,7 +215,7 @@ Que esse novo ano seja lindo como você. E que eu esteja por perto pra ver tudo 
   rodape: {
     linha: "com todo carinho do mundo,",
     assinatura: "{de}",
-    pequeno: "feliz aniversário, {para} ♥",
+    pequeno: "feliz aniversário, {apelido} ♥",
   },
 
   musica: { tocar: "parabéns", parar: "parar" },
