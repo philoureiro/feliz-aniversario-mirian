@@ -55,7 +55,7 @@ export function Gallery({ onOpen }: Props) {
     <Band tone="blush" title={content.galeria.titulo}>
       <div className="clothesline">
         {rows.map((row, r) => (
-          <div className="line-row" key={r}>
+          <div className={"line-row" + (row.length === 1 ? " single" : "")} key={r}>
             <svg className="string" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true">
               <path d="M0 2 Q 50 22 100 2" fill="none" stroke="var(--ink)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
             </svg>

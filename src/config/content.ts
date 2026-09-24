@@ -36,7 +36,7 @@ export const content = {
     linha1: "feliz aniversário,",
     selo: "{idade} aninhos ✨",
     legendaFotoPrincipal: "a aniversariante mais gata",
-    recado: "Hoje o dia é todo seu. Mas já vou avisando: tô só esperando a hora de te encher de beijo 😏♥",
+    recado: "Hoje o dia é todo seu. A distância atrapalha, mas não impede: daqui mesmo eu tô te mandando uma chuva de beijo 😏♥",
   },
 
   bolo: {
@@ -81,7 +81,7 @@ export const content = {
     itens: [
       { data: "4 de julho de 2026", titulo: "um festival de forró", texto: "No meio da poeira, da sanfona e de tanta gente, eu só conseguia olhar pra você. E não era só pelo sorriso 😏", legenda: "o começo de tudo" },
       { data: "a mesma noite", titulo: "posso te chamar pra dançar?", texto: "Juntei coragem e estendi a mão. Com você coladinha em mim, o forró podia durar a noite inteira.", legenda: "dois pra lá, dois pra cá" },
-      { data: "ainda naquela noite", titulo: "o primeiro beijo", texto: "Na barraca, com o forró tocando lá fora. Um beijo e eu já tava viciado.", legenda: "nosso primeiro beijo ♥" },
+      { data: "ainda naquela noite", titulo: "o primeiro beijo", texto: "Na barraca, com o forró tocando lá fora. Um beijo e eu já tava viciado. (A foto não é daquele dia, mas é assim que eu lembro dele 😏)", legenda: "nosso primeiro beijo ♥" },
     ],
   },
 

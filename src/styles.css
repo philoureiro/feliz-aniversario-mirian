@@ -350,7 +350,8 @@
   @keyframes sway { 0%,100% { rotate: -3deg } 50% { rotate: 3deg } }
   .hang .tape { display: none; }
   .hang .polaroid { padding: 8px 8px 40px; }
-  .hang .polaroid .img { aspect-ratio: 1; }
+  .hang .polaroid .img { aspect-ratio: 4 / 5; }
+  .line-row.single { grid-template-columns: minmax(0, calc(50% - 9px)); justify-content: center; }
   .hang .polaroid .cap { font-size: 21px; bottom: 9px; }
   .peg { position: absolute; top: -22px; left: 50%; width: 13px; height: 36px; margin-left: -6.5px; z-index: 3; background: #E0AE72; border: 2.5px solid var(--ink); border-radius: 3px; box-sizing: border-box; }
   .peg::after { content: ""; position: absolute; left: 50%; top: 6px; bottom: 6px; width: 1.5px; margin-left: -.75px; background: var(--ink); }
@@ -481,3 +482,8 @@
     .reveal.pre { transform: none; opacity: 1; }
     .pre .doodle path, .doodle.pre path { stroke-dashoffset: 0; }
   }
+
+  /* legenda das polaroids no fluxo: se quebrar em duas linhas, a moldura cresce em vez de invadir a foto */
+  .polaroid { padding-bottom: 12px; }
+  .hang .polaroid, .reel { padding-bottom: 10px; }
+  .polaroid .cap { position: static; display: block; margin-top: 10px; padding-inline: 4px; line-height: 1.05; text-wrap: balance; }
