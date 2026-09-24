@@ -7,12 +7,21 @@ import { Twinkles } from "./Intro";
 const STEP = 1.9; // segundos entre uma linha e outra
 
 // Caixa de presente num céu estrelado; ao abrir, a mensagem aparece linha por linha
-export function Finale({ burst, rain }: EffectsProps) {
+export function Finale({ burst, rain, unlocked }: EffectsProps & { unlocked: boolean }) {
   const c = content.final;
   const [opened, setOpened] = useState(false);
+  const [shake, setShake] = useState(false);
 
   const open = (e: MouseEvent<HTMLButtonElement>) => {
     if (opened) return;
+    // trancado: treme e leva de volta até a pergunta
+    if (!unlocked) {
+      setShake(true);
+      vibrate([60, 40, 60]);
+      setTimeout(() => setShake(false), 500);
+      setTimeout(() => document.querySelector(".ask-section")?.scrollIntoView({ behavior: "smooth", block: "center" }), 600);
+      return;
+    }
     setOpened(true);
     const el = e.currentTarget;
     const r = el.getBoundingClientRect();
@@ -27,12 +36,13 @@ export function Finale({ burst, rain }: EffectsProps) {
       <div className="finale">
         <Twinkles count={45} />
         <h2><Rich text={c.titulo} /></h2>
-        <button className={"gift" + (opened ? " open" : "")} onClick={open} aria-label={t(c.dica)}>
+        <button className={"gift" + (opened ? " open" : "") + (unlocked ? "" : " locked") + (shake ? " shake" : "")} onClick={open} aria-label={t(unlocked ? c.dica : c.bloqueado)}>
           <span className="glow" />
           <span className="box"><span className="rib-v" /></span>
           <span className="lid"><span className="rib-v" /><span className="bow" /></span>
+          {!unlocked && <span className="padlock">🔒</span>}
         </button>
-        {!opened && <p className="hint">{t(c.dica)}</p>}
+        {!opened && <p className={"hint" + (unlocked ? "" : " is-locked")}>{t(unlocked ? c.dica : c.bloqueado)}</p>}
         {opened && (
           <div className="lines">
             {c.linhas.map((l, i) => (

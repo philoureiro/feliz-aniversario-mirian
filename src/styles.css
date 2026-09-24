@@ -14,6 +14,7 @@
   }
   * { -webkit-tap-highlight-color: transparent; }
   html { scroll-behavior: smooth; }
+  html.locked, html.locked body { overflow: hidden; height: 100%; overscroll-behavior: none; }
   html, body { margin: 0; }
   body {
     margin: 0;
@@ -43,7 +44,7 @@
   @keyframes draw { from { stroke-dashoffset: 1 } to { stroke-dashoffset: 0 } }
 
   /* ---------- Abertura ---------- */
-  .intro { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding-inline: 18px;
+  .intro { position: fixed; inset: 0; z-index: 50; touch-action: none; overscroll-behavior: contain; display: grid; place-items: center; padding-inline: 18px;
     background: radial-gradient(90% 60% at 50% 40%, #3A2A5E, var(--night)); color: var(--paper-2); transition: opacity 1.2s ease, visibility 1.2s; }
   .intro.gone { opacity: 0; visibility: hidden; }
   .intro .inner { display: flex; flex-direction: column; align-items: center; gap: 30px; text-align: center; position: relative; z-index: 1; }
@@ -138,12 +139,12 @@
   .tier { position: relative; margin: 0 auto; border: 2.5px solid var(--ink); box-sizing: border-box; }
   .tier.top { width: 68%; height: 64px; background: var(--pink); border-radius: 14px 18px 6px 8px / 16px 12px 6px 8px; }
   .tier.bottom { width: 100%; height: 90px; background: var(--lilac); border-radius: 16px 12px 8px 10px / 12px 16px 8px 6px; margin-top: -2.5px; }
-  .drip { position: absolute; left: -2.5px; right: -2.5px; top: -2.5px; height: 30px; }
+  .drip { position: absolute; left: -2.5px; top: -2.5px; width: calc(100% + 5px); height: 30px; display: block; border-radius: 14px 14px 0 0; overflow: hidden; }
   .dots { position: absolute; inset: 34px 14px 10px; }
   .dots i { position: absolute; width: 10px; height: 4px; border-radius: 3px; }
   .plate { width: 118%; margin-left: -9%; height: 16px; border: 2.5px solid var(--ink); border-radius: 50%; background: #fff; margin-top: -6px; box-sizing: border-box; position: relative; z-index: -1; }
   .cake-msg { font-family: "Caveat", cursive; font-size: 30px; margin: 0; min-height: 1.2em; line-height: 1.1; }
-  .tap-hint { margin: -6px 0 0; font-size: 18px; background: var(--hl); padding: 4px 14px; border-radius: 999px; border: 2px solid var(--ink); transform: rotate(-2deg); animation: bob 1.6s ease-in-out infinite; position: relative; z-index: 3; }
+  .tap-hint { margin: -6px 0 22px; font-size: 18px; background: var(--hl); padding: 4px 14px; border-radius: 999px; border: 2px solid var(--ink); transform: rotate(-2deg); animation: bob 1.6s ease-in-out infinite; position: relative; z-index: 3; }
   .wish { color: var(--red); animation: pop .7s cubic-bezier(.3,1.7,.5,1); }
   @keyframes pop { from { transform: scale(.2) rotate(-10deg); opacity: 0 } to { transform: scale(1); opacity: 1 } }
 
@@ -201,8 +202,40 @@
   .ask { position: relative; width: 100%; min-height: 270px; background: #fff; box-shadow: 0 20px 40px rgba(62,44,85,.14); padding: 30px 18px; box-sizing: border-box; transform: rotate(1deg); display: flex; flex-direction: column; align-items: center; justify-content: center; }
   .ask p.q { font-family: "Caveat", cursive; font-size: clamp(32px, 9vw, 42px); line-height: 1.05; margin: 0 0 28px; }
   .yes-row { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
-  .btn.no { background: #fff; transition: left .25s, top .25s; z-index: 2; }
+  .btn.no { background: #fff; transition: left .22s cubic-bezier(.3,1.5,.5,1), top .22s cubic-bezier(.3,1.5,.5,1), transform .2s; z-index: 2; transform: scale(var(--s, 1)); animation: tease 2.8s ease-in-out infinite; touch-action: none; }
+  @keyframes tease { 0%,78%,100% { rotate: 0deg } 82% { rotate: -9deg } 86% { rotate: 8deg } 90% { rotate: -5deg } 94% { rotate: 3deg } }
+  .ask { touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+  .tease { margin: -14px 0 24px; font-size: 18px; color: var(--ink-soft); animation: pop .5s cubic-bezier(.3,1.7,.5,1); }
   .answer { font-family: "Caveat", cursive; font-size: clamp(44px, 13vw, 64px); color: var(--red); margin: 0; line-height: 1; animation: pop .7s cubic-bezier(.3,1.7,.5,1); }
+
+  /* Pergunta final: bloco que chama atenção */
+  .ask-section { width: 100vw; margin-left: calc(50% - 50vw); box-sizing: border-box; overflow: hidden; padding: 96px 18px 110px;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Cpath d='M22 31 C 14 25, 9 20, 10 15 C 11 10, 18 9, 22 14 C 26 9, 33 10, 34 15 C 35 20, 30 25, 22 31Z' fill='%23ffffff' fill-opacity='.14'/%3E%3C/svg%3E"),
+      linear-gradient(165deg, #E2475F 0%, #EC6482 55%, #F592AA 100%); }
+  .ask-section > * { max-width: 484px; }
+  .ask-section h2 { color: #fff; font-size: clamp(46px, 13vw, 64px); text-shadow: 3px 4px 0 var(--ink); animation: float 3s ease-in-out infinite; }
+  .ask-section .ask { border: 3px solid var(--ink); box-shadow: 8px 10px 0 var(--ink); transform: rotate(-1.5deg); padding: 46px 18px 34px; overflow: visible; }
+  .ask-section .ask .q { font-size: clamp(34px, 10vw, 46px); }
+  .stamp { position: absolute; top: -20px; right: -8px; z-index: 3; background: var(--red); color: #fff; font: 700 26px/1 "Caveat", cursive; text-transform: uppercase; letter-spacing: .04em;
+    padding: 8px 16px; border: 3px solid var(--ink); border-radius: 999px; rotate: 10deg; animation: beat 1.3s ease-in-out infinite; }
+  .btn.yes { background: var(--red); color: #fff; font-size: 34px; padding: 14px 38px; animation: ring 1.4s ease-out infinite; }
+  @keyframes ring { 0% { box-shadow: 3px 4px 0 var(--ink), 0 0 0 0 rgba(226,71,95,.55) } 100% { box-shadow: 3px 4px 0 var(--ink), 0 0 0 22px rgba(226,71,95,0) } }
+  .unlocked { margin: 22px 0 0; font: 700 26px/1.1 "Caveat", cursive; background: var(--hl); padding: 6px 16px; border: 2.5px solid var(--ink); border-radius: 999px; animation: pop .7s cubic-bezier(.3,1.7,.5,1) .6s both, bob 1.6s ease-in-out 1.3s infinite; }
+  .caution { position: absolute; left: -10%; width: 120%; max-width: none; height: 42px; display: flex; align-items: center; overflow: hidden; background: var(--hl); border-block: 3px solid var(--ink); z-index: 1; }
+  .caution.top { top: 22px; rotate: -3deg; }
+  .caution.bottom { bottom: 26px; rotate: 2.5deg; }
+  .caution .track { display: flex; flex: none; gap: 28px; padding-left: 28px; white-space: nowrap; font: 700 24px/1 "Caveat", cursive; color: var(--ink); animation: marquee 14s linear infinite; }
+  .caution.bottom .track { animation-direction: reverse; }
+  @keyframes marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+
+  /* Presente trancado até responder a pergunta */
+  .gift.locked { animation: none; filter: saturate(.35) brightness(.75); }
+  .gift { transition: filter .8s; }
+  .gift .padlock { position: absolute; left: 50%; top: 58%; z-index: 5; font-size: 44px; translate: -50% -50%; filter: drop-shadow(0 3px 0 rgba(0,0,0,.35)); }
+  .gift.shake { animation: shake .45s ease-in-out; }
+  @keyframes shake { 0%,100% { transform: translateX(0) } 20% { transform: translateX(-10px) rotate(-4deg) } 40% { transform: translateX(10px) rotate(4deg) } 60% { transform: translateX(-7px) } 80% { transform: translateX(7px) } }
+  .finale .hint.is-locked { animation: none; color: var(--pink); max-width: 26ch; }
 
   /* Final mágico: presente num céu estrelado */
   .finale { position: relative; width: 100vw; align-self: center; padding: 64px 22px 72px; box-sizing: border-box; overflow: hidden;

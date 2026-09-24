@@ -22,10 +22,23 @@ export default function App() {
   const [phase, setPhase] = useState<"closed" | "opening" | "open">("closed"); // closed → opening → open
   const [lightbox, setLightbox] = useState<LightboxItem | null>(null);
   const [playing, setPlaying] = useState(false);
+  const [answered, setAnswered] = useState(false);
   const stopRef = useRef<(() => void) | null>(null);
   useReveal();
 
-  useEffect(() => { document.title = t(content.tituloDaAba); }, []);
+  useEffect(() => {
+    document.title = t(content.tituloDaAba);
+    // o navegador não restaura a rolagem antiga: a página sempre começa no topo
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
+
+  // enquanto o envelope está na tela, a página de trás não rola
+  useEffect(() => {
+    const locked = phase !== "open";
+    document.documentElement.classList.toggle("locked", locked);
+    return () => document.documentElement.classList.remove("locked");
+  }, [phase]);
 
   const stop = () => stopRef.current?.();
   const play = () => {
@@ -38,6 +51,7 @@ export default function App() {
   const openEnvelope = () => {
     if (phase !== "closed") return;
     setPhase("opening");
+    window.scrollTo({ top: 0, behavior: "instant" });
     play();
     setTimeout(() => {
       setPhase("open");
@@ -66,8 +80,8 @@ export default function App() {
         <Reels onOpen={openMedia} />
         <Letter />
         <Notes burst={burst} />
-        <Ask burst={burst} rain={rain} />
-        <Finale burst={burst} rain={rain} />
+        <Ask burst={burst} rain={rain} onYes={() => setAnswered(true)} />
+        <Finale burst={burst} rain={rain} unlocked={answered} />
       </div>
 
       <footer>
