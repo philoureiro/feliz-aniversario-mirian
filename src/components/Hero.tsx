@@ -36,7 +36,7 @@ export function Hero({ drawn, onOpen }: { drawn: string; onOpen: OpenMedia }) {
         </div>
         <h1>
           <span className="l1">{t(c.linha1)}</span>
-          <span className="l2">{[...name].map((ch, i) => <span key={i} style={{ animationDelay: i * 0.12 + "s" }}>{ch}</span>)}</span>
+          <span className="l2"><span className="name-float">{name}</span></span>
         </h1>
         <span className="age">{t(c.selo)}</span>
 
